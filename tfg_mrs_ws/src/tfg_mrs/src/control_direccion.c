@@ -12,8 +12,6 @@
 #include <net/if.h>
 
 #define CAN_INTERFACE "can0"
-
-// COB-IDs
 #define COBID_JOYSTICK 0x186 //TPDO1 MANDO
 #define COBID_CONTROLADORA_DIR 0x205 //RPDO1 CONTROLADORA
 
@@ -55,7 +53,6 @@ long map_joystick_to_position(unsigned char joystick_value) {
     }
     if (joystick_value >= 0x00 && joystick_value < 0x7F) {
         // Mapeo de [0x00, 0x7E] a [0xFFFFFC18, 0xFFFFFFFF]
-        //position = (long)(0xFFFFFC18 - (joystick_value * 0xFFFFFC18 / 0x7E));
         position = (long)(0xFFFFFC18 + ((joystick_value * (0xFFFFFFFF - 0xFFFFFC18)) / 0x7E));
     }
     return position;
